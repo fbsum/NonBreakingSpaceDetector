@@ -1,0 +1,37 @@
+<idea-plugin>
+    <id>com.fbsum.plugin.nonbreakingspacedetector</id>
+    <name>Non-breaking Space Detector</name>
+    <version>0.0.1</version>
+    <vendor email="scausum@gmail.com" url="https://github.com/fbsum">fbsum</vendor>
+
+    <description><![CDATA[
+      Plugin for detecting and fixing non-breaking space in strings.xml.<br>
+    ]]></description>
+
+    <change-notes><![CDATA[
+      Release 0.0.1: Initial release.<br>
+    ]]>
+    </change-notes>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <idea-version since-build="145"/>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <extensions defaultExtensionNs="com.intellij">
+    </extensions>
+
+    <actions>
+        <action id="FixNonBreakingSpaceAction"
+                class="com.fbsum.plugin.nonbreakingspacedetector.FixNonBreakingSpaceAction"
+                text="Fix Non-breaking Space"
+                description="Plugin for detecting and fixing non-breaking space in strings.xml.">
+            <add-to-group group-id="ToolsXmlGroup" anchor="first"/>
+        </action>
+    </actions>
+
+</idea-plugin>
