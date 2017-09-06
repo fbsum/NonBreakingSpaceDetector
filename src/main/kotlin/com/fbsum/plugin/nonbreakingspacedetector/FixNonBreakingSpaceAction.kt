@@ -16,12 +16,14 @@ class FixNonBreakingSpaceAction : AnAction() {
     private val log = Logger.getInstance(FixNonBreakingSpaceAction::class.java)
     private val VALID_FILE_NAME = "strings.xml"
 
+    override fun update(event: AnActionEvent) {
+        super.update(event)
+        val virtualFile = event.getData(LangDataKeys.VIRTUAL_FILE) ?: return
+        event.presentation.isVisible = isValidFile(virtualFile)
+    }
+
     override fun actionPerformed(event: AnActionEvent) {
         val virtualFile = event.getData(LangDataKeys.VIRTUAL_FILE) ?: return
-        if (isValidFile(virtualFile) == false) {
-            return
-        }
-
         val project = event.getData(PlatformDataKeys.PROJECT) ?: return
         val xmlFile: XmlFile = PsiManager.getInstance(project).findFile(virtualFile) as XmlFile
         object : WriteCommandAction.Simple<Any>(project) {
