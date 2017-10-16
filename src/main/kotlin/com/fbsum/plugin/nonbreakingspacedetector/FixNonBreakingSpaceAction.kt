@@ -22,6 +22,13 @@ class FixNonBreakingSpaceAction : AnAction() {
         event.presentation.isVisible = isValidFile(virtualFile)
     }
 
+    /**
+     * 判断当前显示的文件是否为 strings.xml
+     */
+    private fun isValidFile(file: VirtualFile): Boolean {
+        return StringUtil.equals(file.name, VALID_FILE_NAME)
+    }
+
     override fun actionPerformed(event: AnActionEvent) {
         val virtualFile = event.getData(LangDataKeys.VIRTUAL_FILE) ?: return
         val project = event.getData(PlatformDataKeys.PROJECT) ?: return
@@ -32,12 +39,5 @@ class FixNonBreakingSpaceAction : AnAction() {
                 Utils.apply(xmlFile.document)
             }
         }.execute()
-    }
-
-    /**
-     * 判断当前显示的文件是否为 strings.xml
-     */
-    private fun isValidFile(file: VirtualFile): Boolean {
-        return StringUtil.equals(file.name, VALID_FILE_NAME)
     }
 }
